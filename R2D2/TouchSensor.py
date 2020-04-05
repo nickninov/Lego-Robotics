@@ -1,6 +1,6 @@
 from ev3dev2.sensor.lego import TouchSensor
-from ev3dev2.motor import *
 from threading import Thread
+from Movement import Movement
 import os
 
 class Button:
@@ -8,9 +8,7 @@ class Button:
     def __init__(self):
         self.button = TouchSensor()
 
-        self.leftMotor =  LargeMotor(OUTPUT_A)
-        self.rightMotor = LargeMotor(OUTPUT_D)
-        self.mediumMotor = MediumMotor(OUTPUT_C)
+        self.move = Movement()
 
         print("Starting button thread")
 
@@ -22,7 +20,4 @@ class Button:
     def isPressed (self):
         while True:
             if self.button.is_pressed == True:
-                self.mediumMotor.stop()
-                self.leftMotor.stop()
-                self.rightMotor.stop()
-                os._exit(0)
+                self.move.exit()

@@ -1,5 +1,6 @@
 from ev3dev2.power import PowerSupply
 from ev3dev2.motor import *
+from Movement import Movement
 from threading import Thread
 import os
 import time
@@ -12,9 +13,7 @@ class Battery:
         self.medVoltage = self.maxVoltage * 0.5
         self.exitVoltage = self.minVoltage + (self.minVoltage * 0.05)
 
-        self.leftMotor =  LargeMotor(OUTPUT_A)
-        self.rightMotor = LargeMotor(OUTPUT_D)
-        self.mediumMotor = MediumMotor(OUTPUT_C)
+        self.move = Movement()
 
         print("Starting battery thread")
 
@@ -30,10 +29,7 @@ class Battery:
     def chargeStatus(self):
         while True:
             if self.getCurrentVoltage() <= self.exitVoltage:
-                self.mediumMotor.stop()
-                self.leftMotor.stop()
-                self.rightMotor.stop()
-                os._exit(0)
+                self.move.exit()
             else:
                 # Sleep for 1 min and 30 sec
                 time.sleep(90)
