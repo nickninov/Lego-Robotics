@@ -1,25 +1,38 @@
 from Battery import Battery
 from TouchSensor import Button
-from Movement import Movement
-from ev3dev2.sound import Sound
-from threading import Thread
+from Actions import Actions
+from datetime import datetime
+import socket
 
 if __name__ == '__main__':
 
-    # Declaring variables
-    battery = Battery() # Starting battery thread
-    button = Button() # Starting button thread
-    sound = Sound()
-    move = Movement()
+    try:
+        # Create client socket
+        client = socket.socket()
 
-    def readySound():
-        sound.play_file("Sounds/1.wav", 100, Sound.PLAY_WAIT_FOR_COMPLETE)
+        # Connect to server
+        client.connect(('192.168.1.68', 4200))
 
-    readyThread = Thread(target=readySound, args=())
-    readyThread.start()
+        message = client.recv(1024).decode()
+        print("Server message: " + message)
 
-    print("Start main thread\n")
+        # Starting battery thread
+        battery = Battery(client)
 
-    while True:
+        # Starting button thread
+        button = Button(client)
 
-        move.movement()
+        # Declare movement
+        action = Actions()
+
+        print("Start main thread\n")
+
+        while True:
+            action.movement(client)
+
+    # Server is not connected
+    except ConnectionRefusedError:
+        # Get current time HH:MM:SS
+        now = datetime.now()
+        time = now.strftime("%H:%M:%S")
+        print(str(time) + ": Server is not connected")

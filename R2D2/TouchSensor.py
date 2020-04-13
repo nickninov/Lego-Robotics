@@ -1,14 +1,16 @@
 from ev3dev2.sensor.lego import TouchSensor
 from threading import Thread
-from Movement import Movement
+from Actions import Actions
 import os
 
 class Button:
 
-    def __init__(self):
+    def __init__(self, client):
         self.button = TouchSensor()
 
-        self.move = Movement()
+        self.action = Actions()
+
+        self.client = client
 
         print("Starting button thread")
 
@@ -20,4 +22,5 @@ class Button:
     def isPressed (self):
         while True:
             if self.button.is_pressed == True:
-                self.move.exit()
+                # Exit system
+                self.action.exit(self.client)

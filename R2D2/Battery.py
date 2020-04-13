@@ -1,19 +1,21 @@
 from ev3dev2.power import PowerSupply
 from ev3dev2.motor import *
-from Movement import Movement
+from Actions import Actions
 from threading import Thread
 import os
 import time
 
 class Battery:
 
-    def __init__(self):
+    def __init__(self, client):
         self.minVoltage = PowerSupply().min_voltage
         self.maxVoltage = PowerSupply().max_voltage
         self.medVoltage = self.maxVoltage * 0.5
         self.exitVoltage = self.minVoltage + (self.minVoltage * 0.05)
 
-        self.move = Movement()
+        self.action = Actions()
+
+        self.client = client
 
         print("Starting battery thread")
 
@@ -29,7 +31,8 @@ class Battery:
     def chargeStatus(self):
         while True:
             if self.getCurrentVoltage() <= self.exitVoltage:
-                self.move.exit()
+                # Exit system
+                self.action.exit(self.client)
             else:
                 # Sleep for 1 min and 30 sec
                 time.sleep(90)
