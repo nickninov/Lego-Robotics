@@ -98,7 +98,7 @@ class Actions:
         # Stop engines
         elif k == '0':
             self.stop()
-            print(str(time) + ": Stopped engine")
+            print(str(time) + ": Stopped motors")
 
         # Go forward
         elif k == 'w':
