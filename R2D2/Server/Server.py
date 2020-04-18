@@ -9,6 +9,8 @@ server.bind(('192.168.1.68', 4200))
 
 server.listen(1)
 
+print("Server is running")
+
 while True:
     clientConnection, address = server.accept()
 

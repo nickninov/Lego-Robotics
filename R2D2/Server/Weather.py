@@ -17,10 +17,10 @@ def getWeather():
 
             # Get weather data
             data = requests.get(url).json()
-            weatherText = "The current temperature in " + str(data['name']) + " is " + str(data['main']['temp']) +" degrees"
 
-            print("Successful")
+            # Get
+            weatherText = str(round(data['main']['temp']))
+
             return weatherText
         except:
-            print("Failure")
             return "Failed"
