@@ -1,6 +1,7 @@
 from Battery import Battery
 from TouchSensor import Button
 from Actions import Actions
+from RobotDisplay import RobotDisplay
 from datetime import datetime
 import socket
 
@@ -16,11 +17,15 @@ if __name__ == '__main__':
         message = client.recv(1024).decode()
         print("Server message: " + message)
 
+        # Start Ev3 screen
+        display = RobotDisplay('maker')
+        display.startScreen()
+
         # Starting battery thread
-        battery = Battery(client)
+        battery = Battery(client, display)
 
         # Starting button thread
-        button = Button(client)
+        button = Button(client, display)
 
         # Declare movement
         action = Actions()
@@ -28,10 +33,16 @@ if __name__ == '__main__':
         print("Start main thread\n")
 
         while True:
-            action.movement(client)
+            action.movement(client, display)
 
     # Server is not connected
     except ConnectionRefusedError:
+        # Declare movement
+        action = Actions()
+
+        # Play error sound
+        action.playFile("Sounds/4.wav")
+
         # Get current time HH:MM:SS
         now = datetime.now()
         time = now.strftime("%H:%M:%S")

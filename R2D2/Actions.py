@@ -66,7 +66,8 @@ class Actions:
         self.rightMotor.stop()
 
     # Exit program
-    def exit(self, client):
+    def exit(self, client, display):
+
         # Stop the motors
         self.stop()
 
@@ -80,10 +81,11 @@ class Actions:
         now = datetime.now()
         time = now.strftime("%H:%M:%S")
         print(str(time) + ": Exit program")
-        os._exit(0)
+
+        display.exit()
 
     # Move Character
-    def movement(self, client):
+    def movement(self, client, display):
         # Get user's input
         k = self.getch()
 
@@ -93,7 +95,7 @@ class Actions:
 
         # Exit program
         if k == 'q':
-            self.exit(client)
+            self.exit(client, display)
 
         # Stop engines
         elif k == '0':
@@ -137,6 +139,8 @@ class Actions:
 
             # Check if message was successful
             if result == "Failed":
+                display.drawText("")
                 self.playFile("Sounds/4.wav")
             else:
-                self.sound.speak(result)
+                display.drawText(result)
+                self.playFile("Sounds/1.wav")

@@ -7,7 +7,7 @@ import time
 
 class Battery:
 
-    def __init__(self, client):
+    def __init__(self, client, display):
         self.minVoltage = PowerSupply().min_voltage
         self.maxVoltage = PowerSupply().max_voltage
         self.medVoltage = self.maxVoltage * 0.5
@@ -16,7 +16,7 @@ class Battery:
         self.action = Actions()
 
         self.client = client
-
+        self.display = display
         print("Starting battery thread")
 
         # Execute battery thread
@@ -32,7 +32,7 @@ class Battery:
         while True:
             if self.getCurrentVoltage() <= self.exitVoltage:
                 # Exit system
-                self.action.exit(self.client)
+                self.action.exit(self.client, self.display)
             else:
                 # Sleep for 1 min and 30 sec
                 time.sleep(90)
