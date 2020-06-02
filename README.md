@@ -5,7 +5,7 @@ Terminal command:<br>`ssh robot@ev3dev.local`
 <br><br>Password:<br>`maker`
 ### Run sudo commands without asking Ev3 for a password
 1) When you SSH in to the Ev3 type <br>`sudo visudo`
-2) In the bottom of the file - below **#includedir /etc/sudoers.d**, add <br>`username ALL=(ALL) NOPASSWD: ALL`<br>To check what is your robot's username write <br>`whoami`
+2) In the bottom of the file - below **#includedir /etc/sudoers.d**, add <br>`username ALL=(ALL) NOPASSWD: ALL`<br>To check what is your robot's username type <br>`whoami`
 3) Exit and save the file
 
 ### R2-D2
