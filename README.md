@@ -1,4 +1,4 @@
-# Python Lego Robotics
+# Python Robotics
 
 ## Launch Ev3
 Terminal command:<br>`ssh robot@ev3dev.local`
