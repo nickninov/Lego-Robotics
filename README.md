@@ -40,4 +40,5 @@ This project allows the user to remotely control the Lego F1 from a Raspberry Pi
 
 2) Launch Raspberry Pi
 * `LD_PRELOAD=/usr/lib/arm-linux-gnueabihf/libatomic.so.1 python3`
-* When Python loads `os.system('python3 Main.py --output output')`
+> import os <br>
+> os.system('python3 Main.py --output output')
