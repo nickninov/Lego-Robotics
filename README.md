@@ -8,7 +8,7 @@ Terminal command:<br>`ssh robot@ev3dev.local`
 2) In the bottom of the file - below **#includedir /etc/sudoers.d**, add <br>`username ALL=(ALL) NOPASSWD: ALL`<br>To check what is your robot's username type <br>`whoami`
 3) Exit and save the file
 
-### R2-D2
+# R2-D2
 This project allows the user to control R2-D2 through the keyboard and ask it what the weather is. <br>
 * Key **0** - Stops the motors
 * Key **Q** - Stops the server and shuts down Ev3
