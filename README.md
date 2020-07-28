@@ -22,3 +22,22 @@ This project allows the user to control R2-D2 through the keyboard and ask it wh
 **How to launch:**
  1) Launch Server.py <br> `python3 Server.py` <br>
  2) Launch Main.py <br> `python3 Main.py`
+
+
+# F1
+This project allows the user to remotely control the Lego F1 from a Raspberry Pi from a GUI and take pictures with the Raspberry Pi camera. <br>
+
+* Key **Q** - Exit program
+* Key **E** - Snapshot
+* Key **W** - Go forward
+* Key **S** - Go backwards
+* Key **A** - Turn left
+* Key **D** - Turn right
+* Key **Space** - Stop motors
+
+**How to launch:**
+1) Launch Ev3 <br> `python3 Main.py`
+
+2) Launch Raspberry Pi
+* `LD_PRELOAD=/usr/lib/arm-linux-gnueabihf/libatomic.so.1 python3`
+* When Python loads `os.system('python3 Main.py --output output')`
