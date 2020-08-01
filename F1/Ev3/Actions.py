@@ -50,13 +50,13 @@ class Actions:
 
     # Forward movement
     def forward(self):
-        self.leftMotor.run_direct(duty_cycle_sp = -self.speed)
-        self.rightMotor.run_direct(duty_cycle_sp = -self.speed)
+        self.leftMotor.run_direct(duty_cycle_sp = self.speed)
+        self.rightMotor.run_direct(duty_cycle_sp = self.speed)
 
     # Backward movement
     def backwards(self):
-        self.leftMotor.run_direct(duty_cycle_sp = self.speed)
-        self.rightMotor.run_direct(duty_cycle_sp = self.speed)
+        self.leftMotor.run_direct(duty_cycle_sp = -self.speed)
+        self.rightMotor.run_direct(duty_cycle_sp = -self.speed)
 
     # Turn left
     def left(self):
